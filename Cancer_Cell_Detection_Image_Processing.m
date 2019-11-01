@@ -3,8 +3,8 @@ Detection of cancer cells over blood microscopy images based on shape anomaly
 Samples of 20 images’ segmentation
 ab_global=[]
 for image_index=1:5:108
-    file_name=dir(strcat('~/TFM/ALL_IDB1/im/*.jpg'));
-    input_image=imread(strcat('~/TFM/ALL_IDB1/im/',file_name(image_index).name));
+    file_name=dir(strcat('~/im/*.jpg'));
+    input_image=imread(strcat('~/im/',file_name(image_index).name));
     %% L*a*b Color Space
     inputImLAB = rgb2lab(input_image);
     % Extract a* and b* channels and reshape
@@ -22,10 +22,10 @@ Image Segmentation
 load computedClusterCenters.mat
 
 stats_total = [];
-file_name=dir(strcat('~/TFM/ALL_IDB1/im/*.jpg'));
-cancer_cell_coords=dir(strcat('~/TFM/ALL_IDB1/edited_coords/*.xyc.txt'));
+file_name=dir(strcat('~/im/*.jpg'));
+cancer_cell_coords=dir(strcat('~/edited_coords/*.xyc.txt'));
 for main_loop_index=1:108
-    input_image=imread(strcat('~/TFM/ALL_IDB1/im/',file_name(main_loop_index).name));
+    input_image=imread(strcat('~/im/',file_name(main_loop_index).name));
 
 %% Image segmentation
     size_image = size(input_image);
@@ -152,7 +152,7 @@ Feature Extraction
         stats(i).meanval = meanval;
         %%Checking labels of images
         if contains(file_name(main_loop_index).name, '_1')
-            cells=tdfread(strcat('/~/TFM/ALL_IDB1/edited_coords/'
+            cells=tdfread(strcat('/~/edited_coords/'
 ));
             x1 = bb(1);
             y1 = bb(2);
@@ -176,7 +176,7 @@ Classification
 TEST_DATA_PERCENTAGE = 40;
 ITERATION_COUNT = 5;
  
-features = csvread('~/TFM/Matlab/test_data_features_extracted_21.csv',1, 0);
+features = csvread('~/test_data_features_extracted.csv',1, 0);
  
 overall_success = zeros(ITERATION_COUNT);
  
